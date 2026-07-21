@@ -1,0 +1,56 @@
+{
+  "name": "logsweeper",
+  "publisher": "Faraz-AhmedDev",
+  "displayName": "LogSweeper",
+  "description": "Safely comments out all console.log statements in the currently active file.",
+  "version": "0.0.1",
+  "icon": "icon.png",
+  "engines": {
+    "vscode": "^1.107.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "logsweeper.cleanConsole",
+        "title": "LogSweeper: Comment Out Console Logs"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "logsweeper.cleanConsole",
+        "key": "cmd+shift+d",
+        "mac": "cmd+shift+d",
+        "win": "ctrl+shift+d",
+        "linux": "ctrl+shift+d",
+        "when": "editorTextFocus && !editorReadonly"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.107.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "24.x",
+    "typescript-eslint": "^8.61.1",
+    "eslint": "^10.5.0",
+    "typescript": "^6.0.3",
+    "@vscode/test-cli": "^0.0.15",
+    "@vscode/test-electron": "^3.0.0"
+  },
+  "overrides": {
+    "diff": "^8.0.4",
+    "serialize-javascript": "^7.0.6"
+  }
+}
