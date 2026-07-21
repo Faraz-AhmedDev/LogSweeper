@@ -163,7 +163,7 @@ export function activate(context: vscode.ExtensionContext) {
 		async () => {
 			const editor = vscode.window.activeTextEditor;
 			if (!editor) {
-				vscode.window.showErrorMessage("Koi file open nahi hai!");
+				vscode.window.showErrorMessage("No active file is open!");
 				return;
 			}
 
@@ -172,7 +172,7 @@ export function activate(context: vscode.ExtensionContext) {
 			const edits = findConsoleLogs(text);
 
 			if (edits.length === 0) {
-				vscode.window.showInformationMessage("Koi naya console.log nahi mila.");
+				vscode.window.showInformationMessage("No console.log statements found.");
 				return;
 			}
 
