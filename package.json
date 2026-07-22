@@ -97,6 +97,13 @@
         "mac": "cmd+alt+r",
         "win": "ctrl+alt+r",
         "linux": "ctrl+alt+r"
+      },
+      {
+        "command": "logsweeper.scanFolder",
+        "key": "ctrl+alt+f",
+        "mac": "cmd+alt+f",
+        "win": "ctrl+alt+f",
+        "linux": "ctrl+alt+f"
       }
     ],
     "menus": {
