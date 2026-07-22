@@ -14,7 +14,7 @@ All notable changes to the "logsweeper" extension are documented here.
 - **Ignore Rules**: Support for skipping statements prefixed or annotated inline with `logsweeper-ignore`.
 - **Exclusions & Recursion**: Search subfolders and workspaces recursively using optimized globbing, and skip generated directories (`node_modules`, `.next`, `dist`, etc.) by default.
 - **Detailed Statistics**: Scan summary showing files scanned/modified, counts of actions, and duration, outputting to a dedicated Output channel.
-- **Default Shortcuts**: Conflict-free mnemonic keybindings for Commenting (`cmd+alt+c`), Uncommenting (`cmd+alt+u`), Toggling (`cmd+alt+t`), Deletion (`cmd+alt+e`), and Restoring backups (`cmd+alt+r`).
+- **Default Shortcuts**: Conflict-free mnemonic keybindings for Commenting (`cmd+alt+c`), Uncommenting (`cmd+alt+u`), Toggling (`cmd+alt+t`), Deletion (`cmd+alt+e`), Restoring backups (`cmd+alt+r`), and Scan Folder (`cmd+shift+alt+f`).
 - **Interactive Preview Bug Fix**: Resolved a bug where the interactive changes preview dialog (QuickPick) was not shown (`quickPick.show()` was missing), causing the sweep commands to hang indefinitely.
 - **Detailed Diagnostics**: Added real-time diagnostics logging to the "LogSweeper" Output panel.
 - **Comprehensive Settings**: Preferences for comment mode, backup retention, preview overrides, and specific JS/TS log filters.

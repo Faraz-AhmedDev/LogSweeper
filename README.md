@@ -41,6 +41,8 @@ LogSweeper is a professional, high-performance VS Code extension designed to cle
 | **Toggle Logs** | `Cmd + Alt + T` | `Ctrl + Alt + T` |
 | **Delete Logs** | `Cmd + Alt + E` | `Ctrl + Alt + E` |
 | **Restore Backup** | `Cmd + Alt + R` | `Ctrl + Alt + R` |
+| **Scan Folder** | `Cmd + Shift + Alt + F` | `Ctrl + Shift + Alt + F` |
+
 
 ## Configuration Settings
 
