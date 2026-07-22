@@ -2,14 +2,16 @@
   "name": "logsweeper",
   "publisher": "Faraz-AhmedDev",
   "displayName": "LogSweeper",
-  "description": "Safely comments out all console.log statements in the currently active file.",
-  "version": "0.0.2",
+  "description": "Safely comment out, restore, or delete debug log statements in multi-language codebases recursively.",
+  "version": "0.1.0",
   "icon": "icon.png",
   "engines": {
     "vscode": "^1.107.0"
   },
   "categories": [
-    "Other"
+    "Other",
+    "Linters",
+    "Formatters"
   ],
   "activationEvents": [],
   "main": "./out/extension.js",
@@ -18,18 +20,197 @@
       {
         "command": "logsweeper.cleanConsole",
         "title": "LogSweeper: Comment Out Console Logs"
+      },
+      {
+        "command": "logsweeper.comment",
+        "title": "LogSweeper: Comment Logs"
+      },
+      {
+        "command": "logsweeper.uncomment",
+        "title": "LogSweeper: Uncomment Logs"
+      },
+      {
+        "command": "logsweeper.toggle",
+        "title": "LogSweeper: Toggle Logs"
+      },
+      {
+        "command": "logsweeper.delete",
+        "title": "LogSweeper: Delete Logs"
+      },
+      {
+        "command": "logsweeper.scanActive",
+        "title": "LogSweeper: Scan Active File"
+      },
+      {
+        "command": "logsweeper.scanFolder",
+        "title": "LogSweeper: Scan Folder"
+      },
+      {
+        "command": "logsweeper.scanWorkspace",
+        "title": "LogSweeper: Scan Workspace"
+      },
+      {
+        "command": "logsweeper.preview",
+        "title": "LogSweeper: Preview Changes"
+      },
+      {
+        "command": "logsweeper.restoreBackup",
+        "title": "LogSweeper: Restore Backup"
       }
     ],
     "keybindings": [
       {
-        "command": "logsweeper.cleanConsole",
-        "key": "cmd+shift+d",
-        "mac": "cmd+shift+d",
-        "win": "ctrl+shift+d",
-        "linux": "ctrl+shift+d",
+        "command": "logsweeper.comment",
+        "key": "ctrl+alt+c",
+        "mac": "cmd+alt+c",
+        "win": "ctrl+alt+c",
+        "linux": "ctrl+alt+c",
         "when": "editorTextFocus && !editorReadonly"
+      },
+      {
+        "command": "logsweeper.uncomment",
+        "key": "ctrl+alt+u",
+        "mac": "cmd+alt+u",
+        "win": "ctrl+alt+u",
+        "linux": "ctrl+alt+u",
+        "when": "editorTextFocus && !editorReadonly"
+      },
+      {
+        "command": "logsweeper.toggle",
+        "key": "ctrl+alt+t",
+        "mac": "cmd+alt+t",
+        "win": "ctrl+alt+t",
+        "linux": "ctrl+alt+t",
+        "when": "editorTextFocus && !editorReadonly"
+      },
+      {
+        "command": "logsweeper.delete",
+        "key": "ctrl+alt+e",
+        "mac": "cmd+alt+e",
+        "win": "ctrl+alt+e",
+        "linux": "ctrl+alt+e",
+        "when": "editorTextFocus && !editorReadonly"
+      },
+      {
+        "command": "logsweeper.restoreBackup",
+        "key": "ctrl+alt+r",
+        "mac": "cmd+alt+r",
+        "win": "ctrl+alt+r",
+        "linux": "ctrl+alt+r"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "logsweeper.scanFolder",
+          "when": "explorerResourceIsFolder",
+          "group": "logsweeper@1"
+        },
+        {
+          "command": "logsweeper.scanWorkspace",
+          "group": "logsweeper@2"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "LogSweeper",
+      "properties": {
+        "logsweeper.commentMode": {
+          "type": "string",
+          "enum": [
+            "block",
+            "line"
+          ],
+          "default": "block",
+          "description": "Select the comment style used to comment out log statements ('block' uses C-style /* ... */ comments, 'line' uses // style comments)."
+        },
+        "logsweeper.backupEnabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "Enable automatic backup of files before modifications are applied."
+        },
+        "logsweeper.autoCleanupBackups": {
+          "type": "boolean",
+          "default": true,
+          "description": "Automatically clean up old backups according to retention limit and age policies."
+        },
+        "logsweeper.backupFolder": {
+          "type": "string",
+          "default": ".logsweeper-backups",
+          "description": "Name of the folder inside the workspace root where backups are stored."
+        },
+        "logsweeper.backupLimit": {
+          "type": "number",
+          "default": 50,
+          "description": "Maximum number of backup files to keep in the workspace."
+        },
+        "logsweeper.backupMaxAgeDays": {
+          "type": "number",
+          "default": 7,
+          "description": "Maximum age (in days) of backups to keep before they are auto-deleted."
+        },
+        "logsweeper.includeConsoleWarn": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include console.warn statements when scanning JS/TS/Vue files."
+        },
+        "logsweeper.includeConsoleError": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include console.error statements when scanning JS/TS/Vue files."
+        },
+        "logsweeper.includeConsoleDebug": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include console.debug statements when scanning JS/TS/Vue files."
+        },
+        "logsweeper.includeConsoleInfo": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include console.info statements when scanning JS/TS/Vue files."
+        },
+        "logsweeper.includeConsoleTrace": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include console.trace statements when scanning JS/TS/Vue files."
+        },
+        "logsweeper.includeDebuggerStatements": {
+          "type": "boolean",
+          "default": true,
+          "description": "Include debugger statements when scanning JS/TS/Vue files."
+        },
+        "logsweeper.workspaceExclusions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "node_modules",
+            ".git",
+            "dist",
+            "build",
+            "coverage",
+            ".next",
+            "ios/build",
+            "android/build"
+          ],
+          "description": "Folder names or paths to exclude from workspace and recursive scans."
+        },
+        "logsweeper.ignorePatterns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [],
+          "description": "Regular expressions or strings that specify custom log statements to ignore."
+        },
+        "logsweeper.previewBeforeApplying": {
+          "type": "boolean",
+          "default": true,
+          "description": "Show an interactive change preview before modifying files on disk."
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",

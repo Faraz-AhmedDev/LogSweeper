@@ -30,11 +30,10 @@ console.log("I am already single-line commented out. Skip me!");
   console.log("I am inside a multi-line block. Skip me!");
   console.log("Skip me too!");
 
-
 // 7. Console log inside a string literal (Should be skipped)
 const demoString = "This is a string literal containing console.log('Ignore me!'); and it should not be touched.";
 console.log(demoString);
 
 // 8. Log with no semicolon (Should be commented and match successfully)
-console.log("No semicolon at the end")  
+console.log("No semicolon at the end")
 const nextLine = true;
